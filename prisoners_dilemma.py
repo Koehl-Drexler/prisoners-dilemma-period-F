@@ -299,7 +299,7 @@ def get_action(player, history, opponent_history, score, opponent_score, getting
 
     ######
     ######        
-    #
+    #Target
     elif player == 8:
         if getting_team_name:
             #if there was a previous round just like 
@@ -546,18 +546,23 @@ def get_action(player, history, opponent_history, score, opponent_score, getting
 
     ######
     ######
-    #
+    #Matt
     elif player == 18:
         if getting_team_name:
-            return 'loyal vengeful'
+            #if there was a previous round just like 
+            return 'loyal with unloyal ending'
         else:
+            # use history, opponent_history, score, opponent_score
+            # to compute your strategy      
             if len(opponent_history)==0: #It's the first round: collude
                 return 'c'
-            elif history[-1]=='c' and opponent_history[-1]=='b':
-                return 'b' # betray is they were severely punished last time
+            elif len(opponent_history) == 18:
+                return 'b' # walk away with betrayal when there can be no payback
+            elif opponent_history[0] == 'b':
+                return 'b' # if betrays initially do not trust
             else:
                 return 'c' #otherwise collude
-    
+                
     
 
 
